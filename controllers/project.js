@@ -23,4 +23,16 @@ module.exports = {
         .then(project => res.status(201).send(project))
         .catch(error => res.status(400).send(error));
     },
+    deleteById(req,res) {
+        return Project.destroy({
+            where: {
+                id: req.params.id
+            }
+        })
+        .then((project) => res.json(project))
+        .catch(error => {
+            console.log(req);
+            res.status(400).send(error);
+        });
+    }
 };

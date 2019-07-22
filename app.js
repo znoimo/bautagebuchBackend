@@ -8,6 +8,7 @@ const app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
+app.use(express.urlencoded({extended:false}))
 
 // Models 
 var models = require('./models');
@@ -18,9 +19,6 @@ models.sequelize.sync().then(function(){
 });
 
 require('./routes')(app);
-app.get('*', (req, res) => res.status(200).send({
-    message: 'Welcome to the beginning of nothingness.',
-}));
 
 const port = parseInt(process.env.PORT, 10) || 8000;
 app.set('port', port);
